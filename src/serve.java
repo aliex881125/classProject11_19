@@ -7,7 +7,7 @@ public class serve extends JFrame {
     private Container cp;
 
     private JLabel ip = new JLabel("IP");
-    private JLabel loction = new JLabel("10.51.3.133");
+    private JLabel loction = new JLabel();
     private JLabel port = new JLabel("Port");
     private JTextField jtf = new JTextField();
     private JButton set = new JButton("Setting");
@@ -53,6 +53,23 @@ public class serve extends JFrame {
         jpn2.add(jta1);
         jpn2.add(send);
 
+        set.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                serverNet sn = new serverNet(serve.this);
+                loction.setText(sn.getHostIP());
+
+
+            }
+        });
+        start.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                serverNet sn = new serverNet(serve.this);
+
+
+            }
+        });
         send.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -61,5 +78,8 @@ public class serve extends JFrame {
                jta.setText(jta1.getText());
             }
         });
+    }
+    public void setjta(String str){
+        jta.setText(str);
     }
 }

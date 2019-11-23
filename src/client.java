@@ -7,7 +7,7 @@ public class client extends JFrame {
     private Container cp;
 
     private JLabel ip = new JLabel("IP");
-    private JLabel loction = new JLabel("10.51.3.133");
+    private JLabel loction = new JLabel();
     private JLabel port = new JLabel("Port");
     private JTextField jtf = new JTextField();
     private JButton set = new JButton("Setting");
@@ -53,11 +53,23 @@ public class client extends JFrame {
         jpn2.add(jta1);
         jpn2.add(send);
 
+        set.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clientNet cn = new clientNet(client.this);
+                loction.setText(cn.getHostIP());
+            }
+        });
+
         send.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
             }
         });
+    }
+
+    public void setJta(String str) {
+        jta.setText(str);
     }
 }
