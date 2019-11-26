@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 public class serve extends JFrame {
     private Container cp;
+    private serverNet se;
 
     private JLabel ip = new JLabel("IP");
     private JLabel loction = new JLabel();
@@ -12,7 +13,8 @@ public class serve extends JFrame {
     private JTextField jtf = new JTextField();
     private JButton set = new JButton("Setting");
     private JButton start = new JButton("Start");
-    private JPanel jpn = new JPanel(new GridLayout(1,7,2,2));
+    private JButton exit = new JButton("Exit");
+    private JPanel jpn = new JPanel(new GridLayout(1,8,2,2));
 
     private JTextArea jta = new JTextArea();
     private JScrollPane jsp = new JScrollPane(jta);
@@ -44,6 +46,7 @@ public class serve extends JFrame {
         jpn.add(jtf);
         jpn.add(set);
         jpn.add(start);
+        jpn.add(exit);
 
         jta.setBackground(new Color(200,150,130));
         jta.setFont(new Font("標楷體", Font.PLAIN,30));
@@ -58,6 +61,7 @@ public class serve extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 serverNet sn = new serverNet(serve.this);
                 loction.setText(sn.getHostIP());
+                jtf.setText(Integer.toString(sn.getPort()));
 
 
             }
@@ -66,6 +70,7 @@ public class serve extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 serverNet sn = new serverNet(serve.this);
+                sn.start();
 
 
             }
@@ -73,13 +78,20 @@ public class serve extends JFrame {
         send.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton jbt =(JButton) e.getSource();
-                boolean flag =true;
-               jta.setText(jta1.getText());
+//                if(serve!=null&&!jta.getText().equals("")){
+//
+//                }
+            }
+        });
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
             }
         });
     }
-    public void setjta(String str){
-        jta.setText(str);
+
+    public void appendMessage(String msg){
+        jta.append(msg+"\n------\n");
     }
 }

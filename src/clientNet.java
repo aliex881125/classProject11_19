@@ -16,26 +16,19 @@ public class clientNet extends Thread {
     public clientNet(client fra){
         this.setDaemon(true);
         clientFram=fra;
-
-        try{
-            inetADDr = InetAddress.getLocalHost();
-            hostIP = inetADDr.getHostAddress();
-            hostName =inetADDr.getHostName();
-        }catch (UnknownHostException e){
-            System.out.println("Can't find IP information");
-        }
+    }
+    public void run() {
         byte buff[] = new byte[1024];
+        int n =0;
         try {
-            clientFram.setJta("正在與伺服器建立連線...");
-            socket = new Socket(getHostIP(),getPort());
-            clientFram.setJta("已經與伺服器取得連線...");
-            inputStream=socket.getInputStream();
-            int n = inputStream.read(buff);
-            clientFram.setJta("從伺服器收到:");
-            clientFram.setJta(new String(buff,0,n));
-            inputStream.close();
-            socket.close();
-        }catch (Exception e){
+            clientFram.appendMessage("Connect to Server...\n");
+            socket = new Socket(getHostIP(), getPort());
+            clientFram.appendMessage("Connect!!\n");
+            clientFram.repaint();
+            outStream=socket.getOutputStream();
+            inputStream = socket.getInputStream();
+
+        } catch (Exception e) {
             System.out.println("Error");
         }
     }

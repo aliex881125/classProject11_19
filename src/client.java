@@ -7,11 +7,12 @@ public class client extends JFrame {
     private Container cp;
 
     private JLabel ip = new JLabel("IP");
-    private JLabel loction = new JLabel();
+    private JTextField loction = new JTextField();
     private JLabel port = new JLabel("Port");
     private JTextField jtf = new JTextField();
     private JButton set = new JButton("Setting");
-    private JButton start = new JButton("Start");
+    private JButton connect = new JButton("Connect");
+    private JButton exit = new JButton("Exit");
     private JPanel jpn = new JPanel(new GridLayout(1,7,2,2));
 
     private JTextArea jta = new JTextArea();
@@ -43,7 +44,8 @@ public class client extends JFrame {
         jpn.add(port);
         jpn.add(jtf);
         jpn.add(set);
-        jpn.add(start);
+        jpn.add(connect);
+        jpn.add(exit);
 
         jta.setBackground(new Color(100,150,130));
         jta.setFont(new Font("標楷體", Font.PLAIN,30));
@@ -53,11 +55,15 @@ public class client extends JFrame {
         jpn2.add(jta1);
         jpn2.add(send);
 
-        set.addActionListener(new ActionListener() {
+        connect.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                clientNet cn = new clientNet(client.this);
-                loction.setText(cn.getHostIP());
+                clientNet sn =new clientNet(client.this);
+            JButton tmpBtn = (JButton) e.getSource();
+            if(tmpBtn.isEnabled()){
+                sn.start();
+                tmpBtn.setEnabled(false);
+            }
             }
         });
 
@@ -67,9 +73,15 @@ public class client extends JFrame {
 
             }
         });
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
     }
 
-    public void setJta(String str) {
-        jta.setText(str);
+    public void appendMessage(String msg) {
+        jta.append(msg + "\n------\n");
     }
 }
