@@ -28,7 +28,10 @@ public class clientNet extends Thread {
             clientFram.repaint();
             outStream=socket.getOutputStream();
             inputStream = socket.getInputStream();
-
+            while (true) {
+                n = inputStream.read(buff);
+                clientFram.appendMessage("Serve:" + new String(buff,0 ,n));
+            }
         } catch (Exception e) {
             System.out.println("Error");
         }

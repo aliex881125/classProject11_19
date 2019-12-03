@@ -37,7 +37,8 @@ public class client extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         cp.add(jpn, BorderLayout.NORTH);
-        cp.add(jsp, BorderLayout.CENTER);
+        cp.add(jsp, BorderLayout.EAST);
+        cp.add(jpn3,BorderLayout.CENTER);
         cp.add(jpn2, BorderLayout.SOUTH);
 
         jpn.add(ip);
@@ -53,7 +54,7 @@ public class client extends JFrame {
         jta.setBackground(new Color(100,150,130));
         jta.setFont(new Font("標楷體", Font.PLAIN,30));
         jta.setEditable(false);
-
+        jsp.setPreferredSize(new Dimension(200,600));
 
 
 

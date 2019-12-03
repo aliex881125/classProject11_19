@@ -30,7 +30,7 @@ public class serverNet extends Thread {
     }
     public void run(){
         byte data[] = new byte[1024];
-        int n =0;
+        int n;
         try{
             serverSocket= new ServerSocket(port);
             serveFrame.appendMessage("Server start  watting client connect....");
