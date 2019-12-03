@@ -78,9 +78,10 @@ public class serve extends JFrame {
         send.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                if(serve!=null&&!jta.getText().equals("")){
-//
-//                }
+               if(se !=null&&jta1.getText().equals("")){
+                   se.sendMsg(jta1.getText());
+                   jta1.setText("");
+               }
             }
         });
         exit.addActionListener(new ActionListener() {

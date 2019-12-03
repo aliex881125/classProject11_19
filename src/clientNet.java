@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
@@ -30,6 +31,25 @@ public class clientNet extends Thread {
 
         } catch (Exception e) {
             System.out.println("Error");
+        }
+    }
+    public void sendMsg(String msg){
+        if(socket!=null){
+            try{
+                outStream.write(msg.getBytes());
+            }catch (Exception e){
+                JOptionPane.showMessageDialog(clientFram,e.toString(),"Error",1);
+            }
+        }
+    }
+    public void disconnect(){
+        sendMsg("#disconnect#");
+        try{
+            socket.close();
+            inputStream.close();
+            outStream.close();
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(clientFram,e.toString(),"Error",1);
         }
     }
     public String getHostIP(){

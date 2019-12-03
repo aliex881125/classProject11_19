@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 public class client extends JFrame {
     private Container cp;
+    private clientNet cn;
 
     private JLabel ip = new JLabel("IP");
     private JTextField loction = new JTextField();
@@ -23,6 +24,8 @@ public class client extends JFrame {
     private JTextField jta1 = new JTextField();
     private JButton send = new JButton("Send");
     private JPanel jpn2 = new JPanel(new GridLayout(1,2,2,2));
+
+    private JPanel jpn3 = new JPanel();
 
     public client(){
         init();
@@ -52,6 +55,8 @@ public class client extends JFrame {
         jta.setEditable(false);
 
 
+
+
         jpn2.add(jta1);
         jpn2.add(send);
 
@@ -70,13 +75,17 @@ public class client extends JFrame {
         send.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if(cn !=null&&jta1.getText().equals("")){
+                    cn.sendMsg(jta1.getText());
+                    jta1.setText("");
+                }
             }
         });
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
+                cn.disconnect();
             }
         });
     }
